@@ -8,13 +8,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.media.MediaPlayer;
+//import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 //	private TextView textView;	// debug用
 	private ImageView changeImageView;
 	private ImageView communeImageView;
+	private MediaPlayer loverinkMedia;
 	private boolean[] communeChangeFlg = {false,false,false,false,false};
 
 	@Override
@@ -28,6 +30,7 @@ public class MainActivity extends Activity {
 		
 		changeImageView = (ImageView)findViewById(R.id.imageView_sharu);
 		communeImageView = (ImageView)findViewById(R.id.imageView_commune_beads);
+		loverinkMedia = MediaPlayer.create(this, R.raw.loverink);
 //		textView = (TextView)findViewById(R.id.textView1);
 	}
 
@@ -111,6 +114,7 @@ public class MainActivity extends Activity {
            	if (e.getAction() == MotionEvent.ACTION_UP) {
            		if (checkCommuneChangeFlg(communeChangeFlg[4]) == true) {
            			communeImageView.setVisibility(View.VISIBLE);
+           			loverinkMedia.start();
            		}
            		communeChangeFlg[4] = false;
            	}
@@ -125,6 +129,9 @@ public class MainActivity extends Activity {
     	if (ret != true) {
     		for(int i=0 ; i < communeChangeFlg.length ; i++) {
     			communeChangeFlg[i] = false;
+    		}
+    		if (loverinkMedia.isPlaying()) {
+    			loverinkMedia.stop();
     		}
     		ret = false;
     	}
