@@ -1,6 +1,7 @@
 package com.github.naotoshimura.android.lovelycommune;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,10 @@ public class MainActivity extends Activity {
 //	private TextView textView;	// debug用
 	private ImageView changeImageView;
 	private ImageView communeImageView;
+	private MediaPlayer loverinkMediaH;
+	private MediaPlayer loverinkMediaD;
+	private MediaPlayer loverinkMediaR;
+	private MediaPlayer loverinkMediaS;
 	private MediaPlayer loverinkMedia;
 	private boolean[] communeChangeFlg = {false,false,false,false,false};
 
@@ -30,7 +35,11 @@ public class MainActivity extends Activity {
 		
 		changeImageView = (ImageView)findViewById(R.id.imageView_sharu);
 		communeImageView = (ImageView)findViewById(R.id.imageView_commune_beads);
-		loverinkMedia = MediaPlayer.create(this, R.raw.loverink);
+		loverinkMedia = MediaPlayer.create(this, R.raw.loverink_h); // ダミーで作る
+		loverinkMediaH = MediaPlayer.create(this, R.raw.loverink_h);
+		loverinkMediaD = MediaPlayer.create(this, R.raw.loverink_d);
+		loverinkMediaR = MediaPlayer.create(this, R.raw.loverink_r);
+		loverinkMediaS = MediaPlayer.create(this, R.raw.loverink_s);
 //		textView = (TextView)findViewById(R.id.textView1);
 	}
 
@@ -61,6 +70,7 @@ public class MainActivity extends Activity {
 	            	changeImageView.setImageResource(R.drawable.sharu);
 	              	communeImageView.setVisibility(View.INVISIBLE);
            		}
+           		setLoverinkMedia(loverinkMediaH);
            		communeChangeFlg[0] = false;
            	}
         }
@@ -75,6 +85,7 @@ public class MainActivity extends Activity {
 		           	changeImageView.setImageResource(R.drawable.rakeru);
 		           	communeImageView.setVisibility(View.INVISIBLE);
            		}
+           		setLoverinkMedia(loverinkMediaD);
            		communeChangeFlg[1] = false;
            	}
         }
@@ -89,6 +100,7 @@ public class MainActivity extends Activity {
 		           	changeImageView.setImageResource(R.drawable.ransu);
 		           	communeImageView.setVisibility(View.INVISIBLE);
            		}
+           		setLoverinkMedia(loverinkMediaR);
            		communeChangeFlg[2] = false;
            	}
         }
@@ -103,6 +115,7 @@ public class MainActivity extends Activity {
 		           	changeImageView.setImageResource(R.drawable.davy);
 		           	communeImageView.setVisibility(View.INVISIBLE);
            		}
+           		setLoverinkMedia(loverinkMediaS);
            		communeChangeFlg[3] = false;
            	}
         }
@@ -114,12 +127,13 @@ public class MainActivity extends Activity {
            	if (e.getAction() == MotionEvent.ACTION_UP) {
            		if (checkCommuneChangeFlg(communeChangeFlg[4]) == true) {
            			communeImageView.setVisibility(View.VISIBLE);
-           			loverinkMedia.start();
+           			MediaPlayer m = new MediaPlayer();
+           			m = getLoverinkMedia();
+           			m.start();
            		}
            		communeChangeFlg[4] = false;
            	}
         }
-
         return true;
     }
     
@@ -130,12 +144,20 @@ public class MainActivity extends Activity {
     		for(int i=0 ; i < communeChangeFlg.length ; i++) {
     			communeChangeFlg[i] = false;
     		}
-    		if (loverinkMedia.isPlaying()) {
-    			loverinkMedia.stop();
+    		if (getLoverinkMedia().isPlaying()) {
+    			getLoverinkMedia().stop();
     		}
     		ret = false;
     	}
     	return ret;
+    }
+    
+    private void setLoverinkMedia(MediaPlayer m) {
+    	loverinkMedia = m;
+    }
+    
+    private MediaPlayer getLoverinkMedia() {
+    	return loverinkMedia;
     }
 
 }

@@ -22,11 +22,16 @@ public final class R {
     }
     public static final class drawable {
         public static final int commune_beads=0x7f020000;
-        public static final int davy=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int rakeru=0x7f020003;
-        public static final int ransu=0x7f020004;
-        public static final int sharu=0x7f020005;
+        public static final int commune_beads_d=0x7f020001;
+        public static final int commune_beads_e=0x7f020002;
+        public static final int commune_beads_l=0x7f020003;
+        public static final int commune_beads_o=0x7f020004;
+        public static final int commune_beads_v=0x7f020005;
+        public static final int davy=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int rakeru=0x7f020008;
+        public static final int ransu=0x7f020009;
+        public static final int sharu=0x7f02000a;
     }
     public static final class id {
         public static final int action_settings=0x7f090002;
@@ -40,7 +45,10 @@ public final class R {
         public static final int main=0x7f080000;
     }
     public static final class raw {
-        public static final int loverink=0x7f040000;
+        public static final int loverink_d=0x7f040000;
+        public static final int loverink_h=0x7f040001;
+        public static final int loverink_r=0x7f040002;
+        public static final int loverink_s=0x7f040003;
     }
     public static final class string {
         public static final int TextView=0x7f060003;
