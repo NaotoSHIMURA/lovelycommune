@@ -8,6 +8,9 @@
 package com.github.naotoshimura.android.lovelycommune;
 
 public final class R {
+    public static final class anim {
+        public static final int dokun_thrust=0x7f040000;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -17,8 +20,8 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f050000;
-        public static final int activity_vertical_margin=0x7f050001;
+        public static final int activity_horizontal_margin=0x7f060000;
+        public static final int activity_vertical_margin=0x7f060001;
     }
     public static final class drawable {
         public static final int commune_beads=0x7f020000;
@@ -35,49 +38,49 @@ public final class R {
         public static final int sharu=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f090003;
-        public static final int imageView_commune_beads=0x7f090002;
-        public static final int imageView_sharu=0x7f090001;
-        public static final int textView1=0x7f090000;
+        public static final int action_settings=0x7f0a0003;
+        public static final int imageView_commune_beads=0x7f0a0002;
+        public static final int imageView_sharu=0x7f0a0001;
+        public static final int textView1=0x7f0a0000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int main=0x7f090000;
     }
     public static final class raw {
-        public static final int loverink_d=0x7f040000;
-        public static final int loverink_d_e=0x7f040001;
-        public static final int loverink_d_l=0x7f040002;
-        public static final int loverink_d_o=0x7f040003;
-        public static final int loverink_d_v=0x7f040004;
-        public static final int loverink_h=0x7f040005;
-        public static final int loverink_h_e=0x7f040006;
-        public static final int loverink_h_l=0x7f040007;
-        public static final int loverink_h_o=0x7f040008;
-        public static final int loverink_h_v=0x7f040009;
-        public static final int loverink_r=0x7f04000a;
-        public static final int loverink_r_e=0x7f04000b;
-        public static final int loverink_r_l=0x7f04000c;
-        public static final int loverink_r_o=0x7f04000d;
-        public static final int loverink_r_v=0x7f04000e;
-        public static final int loverink_s=0x7f04000f;
-        public static final int loverink_s_e=0x7f040010;
-        public static final int loverink_s_l=0x7f040011;
-        public static final int loverink_s_o=0x7f040012;
-        public static final int loverink_s_v=0x7f040013;
+        public static final int loverink_d=0x7f050000;
+        public static final int loverink_d_e=0x7f050001;
+        public static final int loverink_d_l=0x7f050002;
+        public static final int loverink_d_o=0x7f050003;
+        public static final int loverink_d_v=0x7f050004;
+        public static final int loverink_h=0x7f050005;
+        public static final int loverink_h_e=0x7f050006;
+        public static final int loverink_h_l=0x7f050007;
+        public static final int loverink_h_o=0x7f050008;
+        public static final int loverink_h_v=0x7f050009;
+        public static final int loverink_r=0x7f05000a;
+        public static final int loverink_r_e=0x7f05000b;
+        public static final int loverink_r_l=0x7f05000c;
+        public static final int loverink_r_o=0x7f05000d;
+        public static final int loverink_r_v=0x7f05000e;
+        public static final int loverink_s=0x7f05000f;
+        public static final int loverink_s_e=0x7f050010;
+        public static final int loverink_s_l=0x7f050011;
+        public static final int loverink_s_o=0x7f050012;
+        public static final int loverink_s_v=0x7f050013;
     }
     public static final class string {
-        public static final int TextView=0x7f060003;
-        public static final int action_settings=0x7f060001;
-        public static final int app_name=0x7f060000;
-        public static final int desc_commune_beads=0x7f060008;
-        public static final int desc_davy=0x7f060006;
-        public static final int desc_rakeru=0x7f060005;
-        public static final int desc_ransu=0x7f060007;
-        public static final int desc_sharu=0x7f060004;
-        public static final int hello_world=0x7f060002;
+        public static final int TextView=0x7f070003;
+        public static final int action_settings=0x7f070001;
+        public static final int app_name=0x7f070000;
+        public static final int desc_commune_beads=0x7f070008;
+        public static final int desc_davy=0x7f070006;
+        public static final int desc_rakeru=0x7f070005;
+        public static final int desc_ransu=0x7f070007;
+        public static final int desc_sharu=0x7f070004;
+        public static final int hello_world=0x7f070002;
     }
     public static final class style {
         /** 
@@ -90,10 +93,10 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
     }
 }

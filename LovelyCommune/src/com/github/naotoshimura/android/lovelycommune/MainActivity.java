@@ -1,8 +1,14 @@
 package com.github.naotoshimura.android.lovelycommune;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MotionEvent;
@@ -44,6 +50,11 @@ public class MainActivity extends Activity {
 	private MediaPlayer loverinkMediaE;
 	private static int loverinkCount = 0;
 	private boolean[] communeChangeFlg = {false,false,false,false,false};
+	Timer mTimer = null;
+	Handler mHandler = new Handler();
+	private AnimationDrawable dokunAnimation;
+	private static boolean mDokiDokiRunFlg = false;
+	private static boolean mDokiFlg = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +93,7 @@ public class MainActivity extends Activity {
 		loverinkMediaSV = MediaPlayer.create(this, R.raw.loverink_s_v);
 		loverinkMediaSE = MediaPlayer.create(this, R.raw.loverink_s_e);
 		textView = (TextView)findViewById(R.id.textView1);
+		
 	}
 
 	@Override
@@ -197,7 +209,7 @@ public class MainActivity extends Activity {
            	if (e.getAction() == MotionEvent.ACTION_UP) {
            		if (checkCommuneChangeFlg(communeChangeFlg[4]) == true) {
            			communeImageView.setVisibility(View.VISIBLE);
-           			communeImageView.setImageResource(R.drawable.commune_beads);
+           			communeImageView.setBackgroundResource(R.drawable.commune_beads);
            			loverinkCount = 0;
            			m = getLoverinkMedia();
            			m.start();
@@ -213,40 +225,100 @@ public class MainActivity extends Activity {
         		return true;
         	}
 
-        	if ((x >= 166 && x <= 189) 
-	         && (y >= 452 && y <= 534)) {
+        	// 左縦線の範囲
+//        	if ((x >= 166 && x <= 189) 
+//	         && (y >= 452 && y <= 534)) {
+//        	}
+//			// 上横線の範囲        	
+//        	else if ((x >= 183 && x <= 286) 
+//   	          && (y >= 438 && y <= 457)) {
+           	// 盤面に変更
+           	if ((x >= 159 && x <= 319) 
+   	         && (y >= 431 && y <= 610)) {
 	        	if (loverinkCount == 0) {
 	            	if(e.getAction() == MotionEvent.ACTION_DOWN) {
-		        		communeImageView.setImageResource(R.drawable.commune_beads_l);
+		        		communeImageView.setBackgroundResource(R.drawable.commune_beads_l);
 		        		setLoverinkMedia(loverinkMediaL);
 		        		getLoverinkMedia().start();
 	           			loverinkCount=1;
 	            	}
 	        	} else if (loverinkCount == 1) {
 	            	if(e.getAction() == MotionEvent.ACTION_DOWN) {
-		        		communeImageView.setImageResource(R.drawable.commune_beads_o);
+		        		communeImageView.setBackgroundResource(R.drawable.commune_beads_o);
 		        		setLoverinkMedia(loverinkMediaO);
 		        		getLoverinkMedia().start();
 	           			loverinkCount=2;
 	            	}
 	        	} else if (loverinkCount == 2) {
 	            	if(e.getAction() == MotionEvent.ACTION_DOWN) {
-		        		communeImageView.setImageResource(R.drawable.commune_beads_v);
+		        		communeImageView.setBackgroundResource(R.drawable.commune_beads_v);
 		        		setLoverinkMedia(loverinkMediaV);
 		        		getLoverinkMedia().start();
 	           			loverinkCount=3;
 	            	}
-	        	}
-	        }
-	        else if ((x >= 183 && x <= 286) 
-	   	         && (y >= 438 && y <= 457)) {
-	        	if (loverinkCount == 3) {
+	        	} else if (loverinkCount == 3) {
 	        		if(e.getAction() == MotionEvent.ACTION_DOWN) {
-		        		communeImageView.setImageResource(R.drawable.commune_beads_e);
-		        		setLoverinkMedia(loverinkMediaE);
-		        		getLoverinkMedia().start();
 			        	// TODO ここにどくんどくん用メソッド入れる。
-		        		loverinkCount=0;
+	        			Log.d("debug","mDokiDokiRunFlg = " + mDokiDokiRunFlg);
+		        		if (!mDokiDokiRunFlg) {
+		        			mDokiDokiRunFlg = true;
+
+		        			// なんでここで表示されないんだろ・・・
+//			        		communeImageView.setBackgroundResource(R.drawable.commune_beads_e);
+			        		setLoverinkMedia(loverinkMediaE);
+			        		getLoverinkMedia().start();
+//		        			// ドクンドクン開始
+//		        			Log.d("debug","mDokiDokiRunFlg = " + mDokiDokiRunFlg);
+
+//			        		while(isLoverinkMedia(getLoverinkMedia())) {
+//			        			try {
+//			        				Log.d("debug","sleep start");
+//									Thread.sleep(1000);
+//			        				Log.d("debug","sleep end");
+//								} catch (InterruptedException e1) {
+//									// TODO 自動生成された catch ブロック
+//									e1.printStackTrace();
+//									break;
+//								}
+//			        		}
+//	        				Log.d("debug","background resource set");
+//		        			communeImageView.setBackgroundResource(R.drawable.commune_beads);
+
+		        			Log.d("debug","mDokiDokiRunFlg = " + mDokiDokiRunFlg);
+//		        			communeImageView.setBackgroundResource(R.anim.dokun_thrust);
+//		        			dokunAnimation = (AnimationDrawable)communeImageView.getBackground();
+//		        			dokunAnimation.start();
+
+		        			Log.d("debug","animation setting start !");
+
+		        			AnimationDrawable anim = new AnimationDrawable();
+		        			Drawable beads_e = this.getResources().getDrawable( R.drawable.commune_beads_e );
+		        			Drawable beads_d = this.getResources().getDrawable( R.drawable.commune_beads_d );
+		        			Drawable beads = this.getResources().getDrawable( R.drawable.commune_beads );
+		        			Drawable beads_end = this.getResources().getDrawable( R.drawable.commune_beads_end );
+	        				
+		        			Log.d("debug","animation addFrame start !");
+
+		        			anim.addFrame( beads_e,  1000 );
+		        			anim.addFrame( beads_d,  500 );
+		        			anim.addFrame( beads,  500 );
+		        			anim.addFrame( beads_d,  500 );
+		        			anim.addFrame( beads,  500 );
+		        			anim.addFrame( beads_end,  10 );
+
+		        			anim.setOneShot(true);
+		        			
+		        			communeImageView.setBackgroundDrawable( anim );
+		        			
+		        			Log.d("debug","animation start !");
+		        			anim.start();
+
+		        			// ドクンドクン終了
+//			        		communeImageView.setImageResource(R.drawable.commune_beads_end);
+		        			mDokiDokiRunFlg = false;
+		        			mDokiFlg = false;
+		        			loverinkCount = -1;
+		        		}
 	        		}
 	        	}
 	        }
@@ -273,7 +345,7 @@ public class MainActivity extends Activity {
     	loverinkMedia = m;
     }
     
-    private MediaPlayer getLoverinkMedia() {
+    public MediaPlayer getLoverinkMedia() {
     	return loverinkMedia;
     }
     
@@ -281,4 +353,38 @@ public class MainActivity extends Activity {
     	return m.isPlaying();
     }
 
+}
+
+class DokiDoki extends Thread {
+
+	private ImageView iv;
+	private MainActivity ma;
+	public DokiDoki(ImageView v,MainActivity m) {
+		iv = v;
+		ma = m;
+	}
+	public void run() {
+		
+		for(int i=0; i<2 ;i++) {
+			while (ma.getLoverinkMedia().isPlaying()) {
+				try {
+					sleep(500);
+				} catch (InterruptedException e1) {
+					// TODO 自動生成された catch ブロック
+					e1.printStackTrace();
+				}
+			}
+			iv.setImageResource(R.drawable.commune_beads_d);
+			try {
+				sleep(2000);
+			} catch (InterruptedException e1) {
+				// TODO 自動生成された catch ブロック
+				e1.printStackTrace();
+			}
+			iv.setImageResource(R.drawable.commune_beads);
+			Log.d("debug","i=" + i);
+		}
+		
+		
+	}
 }
